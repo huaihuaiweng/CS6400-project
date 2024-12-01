@@ -1,6 +1,7 @@
-# database
+# for database project
 *.db
-
+full_data/
+cs6400-project/
 
 .DS_Store
 
