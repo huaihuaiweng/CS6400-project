@@ -100,7 +100,7 @@ def app():
                 paper_id, title, authors, similarity = result
                 st.write(f"**Title**: {title}")
                 st.write(f"**Authors**: {authors}")
-                st.write(f"**Similarity**: {similarity}%")
+                # st.write(f"**Similarity**: {similarity}%")
                 if st.button(f"Add to Reading List: {title}", key=f"add_{paper_id}"):
                     added = add_to_reading_list(conn, paper_id)
                     if added:
