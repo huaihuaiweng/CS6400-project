@@ -20,7 +20,7 @@ def fetch_all_papers():
     return result
 
 # Search for similar titles using fuzzy matching (cached with st.cache_data)
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def search_papers_by_title(papers, query, limit=5):
     titles = [paper[1] for paper in papers]  # Extract only titles
     results = process.extract(query, titles, limit=limit)
