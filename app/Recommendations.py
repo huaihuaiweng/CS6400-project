@@ -1,6 +1,6 @@
 import streamlit as st
 import sqlite3
-
+from app.helpers import load_results_from_file
 # Database connection
 def create_connection():
     try:
@@ -52,10 +52,12 @@ def fetch_paper_details(paper_ids):
         conn.close()
 
 # Mock function to recommend papers
-def reccPaper(reading_list):
-    # Replace this with your recommendation logic
-    # For now, use existing paper IDs for simplicity
-    return [paper[0] for paper in reading_list]  # Mock recommendation IDs
+def reccPaper():
+    res = load_results_from_file()
+    sorted_results = sorted([(count, rec) for rec, count in res.items()], reverse=True)
+    print(sorted_results[:10])
+    return [i[1] for i in sorted_results[:10]]
+
 
 # Recommendations Page
 def app():
@@ -76,7 +78,7 @@ def app():
         st.write(f"**Authors**: {authors}")
 
     # Get recommendations
-    recommended_paper_ids = reccPaper(reading_list)
+    recommended_paper_ids = reccPaper()
     st.write("Debug: Recommended Paper IDs", recommended_paper_ids)  # Debugging output
 
     if not recommended_paper_ids:

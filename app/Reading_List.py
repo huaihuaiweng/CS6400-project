@@ -2,7 +2,7 @@ import streamlit as st
 import sqlite3
 from fuzzywuzzy import process
 from app.Recommendations import app as recommendation_app
-
+from app.helpers import update_results
 
 # Database connection
 def create_connection():
@@ -44,19 +44,29 @@ def fetch_reading_list():
 def add_to_reading_list(conn, paper_id):
     query = "INSERT INTO reading_list (paper_id) VALUES (?)"
     cur = conn.cursor()
+
     try:
         cur.execute(query, (paper_id,))
         conn.commit()
+        query = "SELECT title from papers where paper_id=?"
+        cur.execute(query, (paper_id,))
+        paper_name = cur.fetchall()[0][0]
+        update_results(paper_name)
         return True
     except sqlite3.IntegrityError:
         return False  # Paper already in the reading list
-
+    return False
 # Remove multiple papers from the reading list
 def remove_from_reading_list(conn, paper_ids):
     query = "DELETE FROM reading_list WHERE paper_id = ?"
     cur = conn.cursor()
     for paper_id in paper_ids:
         cur.execute(query, (paper_id,))
+        query = "SELECT title from papers where paper_id=?"
+        cur.execute(query, (paper_id,))
+        paper_name = cur.fetchall()[0][0]
+        update_results(paper_name,add=False)
+
     conn.commit()
 
 def app():
