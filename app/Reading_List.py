@@ -70,25 +70,9 @@ def remove_from_reading_list(conn, paper_ids):
     conn.commit()
 
 
-# # Function to render the reading list dynamically
-# def render_reading_list(placeholder):
-#     reading_list = st.session_state.get("reading_list", [])
-#     with placeholder.container():
-#         if reading_list:
-#             st.write("Select papers to remove from your reading list:")
-#             for index, paper in enumerate(reading_list):
-#                 paper_id, title, authors = paper
-#                 # Ensure unique key using paper_id and index
-#                 checkbox_key = f"checkbox_{paper_id}_{title}_{authors}".replace(" ", "_").replace(",", "_")
-#                 if st.checkbox(f"Title: {title}, Authors: {authors}", key=checkbox_key):
-#                     st.session_state["selected_papers"].add(paper_id)
-#                 else:
-#                     st.session_state["selected_papers"].discard(paper_id)
-#         else:
-#             st.write("Your reading list is empty.")
-
 
 def app():
+
     # Initialize the app
     st.title("Manage Your Reading List")
         
@@ -108,15 +92,8 @@ def app():
     search_query = st.text_input("Enter a title to search:")
     all_papers = fetch_all_papers()
 
-    # Get paper IDs already in the reading list
-    reading_list_paper_ids = {paper[0] for paper in fetch_reading_list()}  # Extract paper_ids
-
     if search_query:
         search_results = search_papers_by_title(all_papers, search_query)
-
-        # Filter out papers already in the reading list
-        search_results = [result for result in search_results if result[0] not in reading_list_paper_ids]
-
         if search_results:
             st.write("Search Results:")
             for result in search_results:
@@ -137,55 +114,34 @@ def app():
     # Display and manage the reading list
     st.header("Your Reading List")
 
-    # Initialize session state for the reading list and selected papers
     if "reading_list" not in st.session_state:
         st.session_state["reading_list"] = fetch_reading_list()
 
     if "selected_papers" not in st.session_state:
         st.session_state["selected_papers"] = set()
 
-    # Define a placeholder for dynamic UI updates
-    placeholder = st.empty()
-
-    def render_reading_list():
-        """Renders the reading list dynamically."""
-        reading_list = st.session_state["reading_list"]
-        with placeholder.container():
-            if reading_list:
-                st.write("Select papers to remove from your reading list:")
-                for paper in reading_list:
-                    paper_id, title, authors = paper
-                    # Generate a truly unique key using paper_id only
-                    checkbox_key = f"checkbox_{paper_id}"
-                    checkbox = st.checkbox(
-                        f"Title: {title}, Authors: {authors}",
-                        value=(paper_id in st.session_state["selected_papers"]),
-                        key=checkbox_key,
-                    )
-                    if checkbox:
-                        st.session_state["selected_papers"].add(paper_id)
-                    else:
-                        st.session_state["selected_papers"].discard(paper_id)
+    reading_list = st.session_state["reading_list"]
+    if reading_list:
+        st.write("Select papers to remove from your reading list:")
+        for paper in reading_list:
+            paper_id, title, authors = paper
+            checkbox_key = f"checkbox_{paper_id}"
+            if st.checkbox(f"Title: {title}, Authors: {authors}", key=checkbox_key):
+                st.session_state["selected_papers"].add(paper_id)
             else:
-                st.write("Your reading list is empty.")
+                st.session_state["selected_papers"].discard(paper_id)
 
-    # Initial render of the reading list
-    render_reading_list()
+        if st.button("Remove Selected Papers"):
+            if st.session_state["selected_papers"]:
+                # Remove selected papers
+                remove_from_reading_list(conn, list(st.session_state["selected_papers"]))
+                st.success("Selected papers have been removed from your reading list.")
+                # Clear selections and refresh reading list
+                st.session_state["selected_papers"].clear()
+                st.session_state["reading_list"] = fetch_reading_list()  # Update the reading list
+            else:
+                st.warning("No papers selected.")
+    else:
+        st.write("Your reading list is empty.")
 
-    # Remove selected papers
-    if st.button("Remove Selected Papers"):
-        if st.session_state["selected_papers"]:
-            # Remove selected papers from the database
-            remove_from_reading_list(conn, list(st.session_state["selected_papers"]))
-            st.success("Selected papers have been removed from your reading list.")
-
-            # Clear selections and refresh the reading list
-            st.session_state["selected_papers"].clear()
-            st.session_state["reading_list"] = fetch_reading_list()
-
-            # **Re-render the updated reading list immediately**
-            placeholder.empty()  # Clear placeholder to avoid duplicate keys
-            render_reading_list()  # Re-render with updated data
-        else:
-            st.warning("No papers selected.")
     conn.close()

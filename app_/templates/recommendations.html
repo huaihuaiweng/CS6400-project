@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Recommendations{% endblock %}
+
+{% block content %}
+<h1>Recommended Papers</h1>
+<ul>
+    {% for paper in recommended_papers %}
+    <li>
+        <strong>{{ paper[1] }}</strong> by {{ paper[2] }}
+        <p>{{ paper[3] }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

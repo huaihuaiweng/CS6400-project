@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Reading List{% endblock %}
+
+{% block content %}
+<h1>Manage Your Reading List</h1>
+
+<!-- Search and Add Papers -->
+<h2>Search and Add Papers</h2>
+<form method="POST">
+    <input type="text" name="search_query" placeholder="Enter a title to search" required>
+    <button type="submit" name="search">Search</button>
+</form>
+
+{% if search_query %}
+    <h3>Search Results for "{{ search_query }}"</h3>
+    {% if search_results %}
+        <ul>
+            {% for result in search_results %}
+            <li>
+                <strong>{{ result[1] }}</strong> by {{ result[2] }}<br>
+                Similarity: {{ result[3] }}%
+                <form method="POST" style="display:inline;">
+                    <input type="hidden" name="paper_id" value="{{ result[0] }}">
+                    <button type="submit" name="add">Add to Reading List</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+{% endif %}
+
+<!-- Display Reading List -->
+<h2>Your Reading List</h2>
+<form method="POST">
+    <ul>
+        {% for paper in reading_list %}
+        <li>
+            <input type="checkbox" name="selected_papers" value="{{ paper[0] }}">
+            <strong>{{ paper[1] }}</strong> by {{ paper[2] }}
+        </li>
+        {% endfor %}
+    </ul>
+    <button type="submit" name="remove">Remove Selected Papers</button>
+</form>
+{% endblock %}
