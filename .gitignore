@@ -2,6 +2,7 @@
 *.db
 full_data/
 cs6400-project/
+combined_results.json
 
 .DS_Store
 

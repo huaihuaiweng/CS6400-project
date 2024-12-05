@@ -64,7 +64,8 @@ def get_similar_abstract(paper_id, cursor, limit=30):
     results = cursor.fetchall()
     #Retrieved abstract from relationalDB
     abstract = results[0][0]
-    
+    if not abstract:
+        return []
     #Make Call to VectorDB; No clue if this works or not because once again my connection is being shot and stabbed
     #Instantiate Collection; using name = abstract change if named differently
     collection = client.get_or_create_collection(name="docs")
@@ -128,8 +129,12 @@ def get_similar_authors(paper_id, cursor,limit=30):
     """
     cursor.execute(query, (paper_id,))
     results = cursor.fetchall()
+    
     #Retrieved abstract from relationalDB
     abstract = results[0][0]
+    
+    if not abstract:
+        return []
     
     #Make Call to VectorDB; No clue if this works or not because once again my connection is being shot and stabbed
     #Instantiate Collection; using name = abstract change if named differently
@@ -139,6 +144,7 @@ def get_similar_authors(paper_id, cursor,limit=30):
       prompt=abstract,
       model="mxbai-embed-large"
     )
+    print(abstract)
     results = collection.query(
       query_embeddings=[response["embedding"]],
       n_results=limit
@@ -293,8 +299,8 @@ def reccPaper(paper_name):
     co_citation_list = find_co_citations(paper_id, cursor,5)
     
     combined_list = abstract_id_list + author_id_list + co_citation_list
-    
-    final_recommendation_list = filter_recommendation(combined_list, cursor)
+    filter_list = [i for i in combined_list if i != paper_id]
+    final_recommendation_list = filter_recommendation(filter_list, cursor)
 
     connection.commit()
     cursor.close()

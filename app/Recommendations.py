@@ -37,7 +37,7 @@ def fetch_paper_details(paper_ids):
         return []
     try:
         query = f"""
-            SELECT paper_id, title, authors
+            SELECT paper_id, title, authors, abstract
             FROM papers
             WHERE paper_id IN ({','.join(['?'] * len(paper_ids))})
         """
@@ -63,36 +63,29 @@ def reccPaper():
 def app():
     st.title("Paper Recommendations")
 
-    # Fetch reading list
+    # Fetch the reading list
     reading_list = fetch_reading_list()
-    st.write("Debug: Reading List", reading_list)  # Debugging output
 
     if not reading_list:
-        st.warning("Your reading list is empty.")
+        st.warning("Your reading list is empty. Add some papers to get recommendations.")
         return
 
-    # Display the reading list
-    st.write("Your Reading List:")
-    for _, title, authors in reading_list:
-        st.write(f"**Title**: {title}")
-        st.write(f"**Authors**: {authors}")
-
-    # Get recommendations
+    # Get recommendations based on the reading list
     recommended_paper_ids = reccPaper()
-    st.write("Debug: Recommended Paper IDs", recommended_paper_ids)  # Debugging output
-
+    
     if not recommended_paper_ids:
-        st.warning("No recommendations available.")
+        st.warning("No recommendations available at this time.")
         return
 
-    # Fetch and display recommended papers
+    # Fetch details of the recommended papers
     recommended_papers = fetch_paper_details(recommended_paper_ids)
-    st.write("Debug: Recommended Papers", recommended_papers)  # Debugging output
 
     if recommended_papers:
-        st.write("Recommendations:")
-        for _, title, authors in recommended_papers:
-            st.write(f"**Title**: {title}")
-            st.write(f"**Authors**: {authors}")
+        st.write("### Recommended Papers:")
+        for i, paper in enumerate(recommended_papers, start=1):
+            paper_id, title, authors, abstract = paper  # Adjust if abstract is part of your fetched details
+            st.write(f"**{i}. Title:** {title}")
+            st.write(f"**Authors:** {authors}")
+            st.write(f"**Abstract:** {abstract}\n")
     else:
         st.warning("No recommendations available.")

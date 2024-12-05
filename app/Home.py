@@ -3,7 +3,7 @@ import sys
 import os
 
 # Add project root to sys.path
-sys.path.append('/Users/saianoopavunuri/Documents/cs6400/project/CS6400-project')
+sys.path.append('/Users/ericweng/GT/CS6400-project')
 
 # Import apps
 from app.Reading_List import app as reading_list_app
