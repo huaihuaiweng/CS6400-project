@@ -3,7 +3,7 @@ from app.program import reccPaper
 import os
 import re
 import sqlite3
-
+import chromadb
 
 def save_results_to_file(final_results, file_name='combined_results.json'):
     with open(file_name, 'w') as f:
@@ -247,3 +247,43 @@ def remove_paper(conn, paper_id):
     except sqlite3.Error as e:
         conn.rollback()
         print(f"Error removing paper: {e}")
+        
+def add_document(collection, paper_id, document, embedding):
+    """
+    Adds a document to a specified ChromaDB collection.
+
+    Parameters:
+        collection: The ChromaDB collection object.
+        paper_id: The unique identifier for the document.
+        document: The document content (e.g., abstract).
+        embedding: The embedding vector for the document.
+    """
+    try:
+        collection.add(
+            ids=[paper_id],
+            embeddings=[embedding],
+            documents=[document]
+        )
+        print(f"Document with paper_id {paper_id} added successfully.")
+    except Exception as e:
+        print(f"Error adding document with paper_id {paper_id}: {e}")
+
+def remove_document(collection, paper_id):
+    """
+    Removes a document from a specified ChromaDB collection by paper_id.
+
+    Parameters:
+        collection: The ChromaDB collection object.
+        paper_id: The unique identifier for the document to be removed.
+    """
+    try:
+        collection.delete(paper_id)
+        print(f"Document with paper_id {paper_id} removed successfully.")
+    except DocumentNotFoundError:
+        print(f"Document with paper_id {paper_id} not found in the collection.")
+    except Exception as e:
+        print(f"Error removing document with paper_id {paper_id}: {e}")
+
+def reconstruct_paper_id(paper_id):
+    if len(paper_id) < 7:
+        return '0'*(7 - len(paper_id)) + paper_id
