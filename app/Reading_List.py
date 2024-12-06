@@ -12,7 +12,7 @@ def create_connection():
 @st.cache_data
 def fetch_all_papers():
     conn = create_connection()
-    query = "SELECT paper_id, title, authors FROM papers where authors is NOT NULL"
+    query = "SELECT paper_id, title, authors FROM papers where authors is NOT NULL and abstract is NOT NULL"
     cur = conn.cursor()
     cur.execute(query)
     result = cur.fetchall()
