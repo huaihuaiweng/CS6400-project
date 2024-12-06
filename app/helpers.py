@@ -4,6 +4,7 @@ import os
 import re
 import sqlite3
 import chromadb
+import ollama
 
 def save_results_to_file(final_results, file_name='combined_results.json'):
     with open(file_name, 'w') as f:
@@ -102,6 +103,8 @@ def insert_new_paper(conn, paper_metadata, citations_from, citations_to, publica
     :param citations_to: List of papers that cite this paper (incoming citations).
     :param publication_date: Date when the paper was published.
     """
+    parsed_data = paper_metadata
+    paper_id = parsed_data['paper_id']
     try:
         cur = conn.cursor()
 
@@ -182,6 +185,20 @@ def insert_new_paper(conn, paper_metadata, citations_from, citations_to, publica
     except sqlite3.Error as e:
         conn.rollback()
         print(f"Error inserting new paper: {e}")
+    
+    client = chromadb.PersistentClient(path="full_data/")
+    collection_docs = client.get_or_create_collection(name="docs")
+    collection_authors = client.get_or_create_collection(name="authors")
+    paper_id = reconstruct_paper_id(paper_id)
+    response = ollama.embeddings(model="mxbai-embed-large", prompt=parsed_data['abstract'])
+    embedding = response["embedding"]
+    add_document(collection_docs, paper_id, parsed_data['abstract'], embedding)
+
+    response = ollama.embeddings(model="mxbai-embed-large", prompt=parsed_data['authors'])
+    embedding = response["embedding"]
+
+
+    add_document(collection_authors, paper_id, parsed_data['authors'], embedding)
 
 def remove_paper(conn, paper_id):
     """
@@ -190,6 +207,7 @@ def remove_paper(conn, paper_id):
     :param conn: SQLite database connection.
     :param paper_id: ID of the paper to remove.
     """
+
     try:
         cur = conn.cursor()
 
@@ -247,6 +265,15 @@ def remove_paper(conn, paper_id):
     except sqlite3.Error as e:
         conn.rollback()
         print(f"Error removing paper: {e}")
+    
+    client = chromadb.PersistentClient(path="full_data/")
+    collection_docs = client.get_or_create_collection(name="docs")
+    collection_authors = client.get_or_create_collection(name="authors")
+    paper_id = reconstruct_paper_id(paper_id)
+    remove_document(collection_docs, paper_id)
+    remove_document(collection_authors, paper_id)
+    
+
         
 def add_document(collection, paper_id, document, embedding):
     """
