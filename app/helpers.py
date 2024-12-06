@@ -287,3 +287,5 @@ def remove_document(collection, paper_id):
 def reconstruct_paper_id(paper_id):
     if len(paper_id) < 7:
         return '0'*(7 - len(paper_id)) + paper_id
+    else: 
+        return paper_id
