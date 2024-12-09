@@ -52,6 +52,8 @@ Run the cells in neo4j_paper_upload.ipynb
 Run the cells in relational_db_upload.ipynb
 Run the cells in relational_paper_db.ipynb
 
+relational_paper_db.ipynb was utilized for our local testing of queries and does not need to be run for data preprocessing
+
 Note that the collections referenced in the vector DB already exist in the current GitHub
 
 ### Running the Project
