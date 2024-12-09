@@ -24,11 +24,16 @@ To test Data Loading locally
 
 ### Data Loading
 
-The full datasets already exist within the papers.db downloaded from the gatech OneDrive and folder files located at the google drive
-The original dataset is available at https://snap.stanford.edu/data/cit-HepTh.html where the abstract information tar can be downloaded: cit-HepTh-abstracts.tar.gz
-Extract the tar and gz files and save the cit-HepTh-abstracts folder in the repository
-Example of datafile
+The full datasets already exist within the papers.db downloaded from the gatech OneDrive and folder files located at the google drive aand therefore further preprocessing is not actually required
 
+To test preprocessing locally:
+The original dataset is available at https://snap.stanford.edu/data/cit-HepTh.html where the abstract information tar can be downloaded: cit-HepTh-abstracts.tar.gz
+Extract the tar and gz files and save the cit-HepTh-abstracts folder in the 
+repository
+
+A sample dataset under 5mb cannot be provided as using a set of those file limits would lead to improper citations and co-citation graphs with missing data
+
+Example of datafile:
 ```
 Paper: hep-th/0002031
 From: Maulik K. Parikh 
@@ -47,10 +52,9 @@ crossover and obtain an N-dependent curve for the phase boundary.
 \\
 ```
 ### Data Preprocessing
-To add files into the vector and relational Databases:
-Run the cells in neo4j_paper_upload.ipynb
-Run the cells in relational_db_upload.ipynb
-Run the cells in relational_paper_db.ipynb
+To initialize files into the vector and relational Databases:
+1. Run the cells in relational_db_upload.ipynb
+2. Run the cells in relational_paper_db.ipynb
 
 relational_paper_db.ipynb was utilized for our local testing of queries and does not need to be run for data preprocessing
 
@@ -59,6 +63,8 @@ Note that the collections referenced in the vector DB already exist in the curre
 ### Running the Project
 Backend Running of files was mostly explained in the data preprocessing
 Funtionalities of adding and deleting files can be tested with the cells of insert_delete_paper.ipynb
+
+project.ipynb contains our visualizations and tests for our reports. The cells can be run on the full dataset and full databases to see the effectiveness of our improvements to the querying.
 
 To run the front end UI:
 streamlit run app/Home.py
