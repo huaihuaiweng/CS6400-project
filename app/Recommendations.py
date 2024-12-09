@@ -1,7 +1,7 @@
 import streamlit as st
 import sqlite3
 from app.helpers import load_results_from_file
-# Database connection
+
 def create_connection():
     try:
         return sqlite3.connect("papers.db")  # Replace with your actual database path
@@ -9,7 +9,6 @@ def create_connection():
         st.error(f"Database connection failed: {e}")
         return None
 
-# Fetch all papers in the reading list
 def fetch_reading_list():
     conn = create_connection()
     if not conn:
@@ -30,7 +29,6 @@ def fetch_reading_list():
     finally:
         conn.close()
 
-# Fetch paper details by paper_id
 def fetch_paper_details(paper_ids):
     conn = create_connection()
     if not conn:
@@ -51,15 +49,12 @@ def fetch_paper_details(paper_ids):
     finally:
         conn.close()
 
-# Mock function to recommend papers
 def reccPaper():
     res = load_results_from_file()
     sorted_results = sorted([(count, rec) for rec, count in res.items()], reverse=True)
     print(sorted_results[:10])
     return [i[1] for i in sorted_results[:10]]
 
-
-# Recommendations Page
 def app():
     st.title("Paper Recommendations")
 
@@ -70,14 +65,12 @@ def app():
         st.warning("Your reading list is empty. Add some papers to get recommendations.")
         return
 
-    # Get recommendations based on the reading list
     recommended_paper_ids = reccPaper()
     
     if not recommended_paper_ids:
         st.warning("No recommendations available at this time.")
         return
 
-    # Fetch details of the recommended papers
     recommended_papers = fetch_paper_details(recommended_paper_ids)
 
     if recommended_papers:
