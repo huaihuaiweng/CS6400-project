@@ -67,7 +67,7 @@ Note that the collections referenced in the vector DB already exist in the curre
 Backend Running of files was mostly explained in the data preprocessing
 Funtionalities of adding and deleting files can be tested with the cells of insert_delete_paper.ipynb
 
-project.ipynb contains our visualizations and tests for our reports. The cells can be run on the full dataset and full databases to see the effectiveness of our improvements to the querying.
+program.ipynb contains our visualizations and tests for our reports. The cells can be run on the full dataset and full databases to see the effectiveness of our improvements to the querying.
 
 To run the front end UI:
 streamlit run app/Home.py
