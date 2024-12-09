@@ -9,7 +9,7 @@ Our project consists of two components:
 1. Our team utilized ipynb files to allow for better setup visualization: ipynb documentation can be found: https://code.visualstudio.com/docs/datascience/jupyter-notebooks, https://jupyter.org/
 2. This can be opened by first creating an environment with `python3 -m venv env` <br>
 3. Followed by `source env/bin/activate` <br>
-4. Our application uses the latest version of the Ollama language model which can be found https://ollama.com/
+4. Our application uses Ollama to locally run LLM models for generating embeddings. It can be downloaded from https://ollama.com/
 5. `pip install -r requirements.txt` will install all the dependencies necessary for our application to function
     Additional version requirements for our project can be found in this requirements.txt file
 6. For our vector DB we utilize ChromaDB found https://www.trychroma.com/ and for our relational database we utilize SQLite3 found https://docs.python.org/3/library/sqlite3.html
