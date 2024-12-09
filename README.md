@@ -46,19 +46,23 @@ crossover and obtain an N-dependent curve for the phase boundary.
 \\
 ```
 ### Data Preprocessing
-
-
-### Running the Project
-Backend Running of files was mostly explained in the data preprocessing
-
-To run the front end UI:
-streamlit run Home.py
-
-To add files into the system:
+To add files into the vector and relational Databases:
 Run the cells in neo4j_paper_upload.ipynb
 Run the cells in relational_db_upload.ipynb
 Run the cells in relational_paper_db.ipynb
 
-## References
+Note that the collections referenced in the vector DB already exist in the current GitHub
 
+### Running the Project
+Backend Running of files was mostly explained in the data preprocessing
+Funtionalities of adding and deleting files can be tested with the cells of insert_delete_paper.ipynb
+
+To run the front end UI:
+streamlit run app/Home.py
+
+
+## References
+https://docs.trychroma.com/guides - Usage guide for chromaDB all code written is our own
+https://docs.python.org/3/library/sqlite3.html - SQLite3 Documentation Guide
+https://docs.streamlit.io/get-started - streamlit documentation guide
 
