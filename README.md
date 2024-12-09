@@ -75,6 +75,4 @@ Make sure you download the dataset and put it in the root folder since the cells
 
 
 
-## References
-
 
