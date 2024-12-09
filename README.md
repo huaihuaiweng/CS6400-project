@@ -15,14 +15,14 @@ Our project consists of two components:
 6. For our vector DB we utilize ChromaDB found https://www.trychroma.com/ and for our relational database we utilize SQLite3 found https://docs.python.org/3/library/sqlite3.html
    Both Databases are part of the pip install process and do not require further management
    
-### Database Download Instructions
-
+### How to Create Databases
+#### Option 1: Get pre-processed database and store locally
 1. Pull the Github Code into a local repository
 2. Download the papers.db file located at https://gtvault-my.sharepoint.com/:u:/g/personal/xweng42_gatech_edu/EaPi6ZNz96ZCpD7J27BEHLMBOoVikGB8ehOBgY5vzfDEhQ into the CS6400-project folder
 3. Download the vector data folder located https://drive.google.com/drive/folders/1iPM551nLRMC2pD0EBWrqfgwT-QSAMAF7?usp=drive_link which includes the full data information
    These files were stored outside of GitHub due to their large sizes being restricted by GitHub upload limits
-
-### Data Loading
+#### Option 2: Run preprocessing (takes time)
+##### Data Loading
 
 The full databases already exist within the papers.db downloaded from the gatech OneDrive and folder files located at the google drive aand therefore further data loading and data preprocessing is not actually required
 
@@ -53,7 +53,7 @@ correspondence. We discuss the necessary conditions for a smooth phase
 crossover and obtain an N-dependent curve for the phase boundary.
 \\
 ```
-### Data Preprocessing
+##### Data Preprocessing
 
 To initialize files into the vector and relational Databases:
 1. Run the cells in relational_db_upload.ipynb to load into the relational DB
