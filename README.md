@@ -53,8 +53,8 @@ crossover and obtain an N-dependent curve for the phase boundary.
 ```
 ### Data Preprocessing
 To initialize files into the vector and relational Databases:
-1. Run the cells in relational_db_upload.ipynb
-2. Run the cells in relational_paper_db.ipynb
+1. Run the cells in relational_db_upload.ipynb to load into the relational DB
+2. Run the cells in vector_db_preprocess.ipynb to load into the vector DB
 
 relational_paper_db.ipynb was utilized for our local testing of queries and does not need to be run for data preprocessing
 
