@@ -2,10 +2,8 @@ import streamlit as st
 import sys
 import os
 
-# Add project root to sys.path
-sys.path.append('/Users/ericweng/GT/CS6400-project')
-
-# Import apps
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(project_root)# Import apps
 from app.Reading_List import app as reading_list_app
 from app.Recommendations import app as recommendations_app
 
