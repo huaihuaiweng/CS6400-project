@@ -30,6 +30,7 @@ If the database download steps are skipped, data loading and data preprocessing 
   
 To (optionally) test preprocessing locally:
 The original dataset is available at https://snap.stanford.edu/data/cit-HepTh.html where the abstract information tar can be downloaded: [cit-HepTh-abstracts.tar.gz](https://snap.stanford.edu/data/cit-HepTh-abstracts.tar.gz)
+
 Extract the tar and gz files and save the cit-HepTh-abstracts folder in the 
 repository
 
