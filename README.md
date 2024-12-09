@@ -24,15 +24,16 @@ To test Data Loading locally
 
 ### Data Loading
 
-The full datasets already exist within the papers.db downloaded from the gatech OneDrive and folder files located at the google drive
+The full datasets already exist within the papers.db downloaded from the gatech OneDrive and folder files located at the google drive aand therefore further preprocessing is not actually required
+
+To test preprocessing locally:
 The original dataset is available at https://snap.stanford.edu/data/cit-HepTh.html where the abstract information tar can be downloaded: cit-HepTh-abstracts.tar.gz
-Extract the tar and gz files and save the cit-HepTh-abstracts folder in the repository
-Example of datafile
+Extract the tar and gz files and save the cit-HepTh-abstracts folder in the 
+repository
 
-A subset of the cit-HepTh-abstracts has been uploaded onto the GitHub utilizing a reduced set of 10 papers from each year
-This set may not be able to retrieve good recommendations or identify valid co-citations and citations due to its far smaller dataset size
-However the below instructions for data loading and preprocessing can be tested using this reduced dataset
+A sample dataset under 5mb cannot be provided as using a set of those file limits would lead to improper citations and co-citation graphs with missing data
 
+Example of datafile:
 ```
 Paper: hep-th/0002031
 From: Maulik K. Parikh 
@@ -51,7 +52,7 @@ crossover and obtain an N-dependent curve for the phase boundary.
 \\
 ```
 ### Data Preprocessing
-To add files into the vector and relational Databases:
+To initialize files into the vector and relational Databases:
 1. Run the cells in relational_db_upload.ipynb
 2. Run the cells in relational_paper_db.ipynb
 
