@@ -1,5 +1,5 @@
 # Project Setup
-Our project consists of two components:
+Our project consists of two components:  
 1. the initial setup / loading of data into the vector DB and relational DB
 2. the interface component utilizing streamlit
 
@@ -12,7 +12,7 @@ Our project consists of two components:
 3. Download the vector data folder located https://drive.google.com/drive/folders/1iPM551nLRMC2pD0EBWrqfgwT-QSAMAF7?usp=drive_link which includes the full data information
    These files were stored outside of GitHub due to their large sizes being restricted by GitHub upload limits
 
-To test Data Loading locally
+To test Data Loading locally  
 1. Our team utilized ipynb files to allow for better setup visualization: ipynb documentation can be found: https://code.visualstudio.com/docs/datascience/jupyter-notebooks, https://jupyter.org/
 2. This can be opened by first creating an environment with `python3 -m venv env` <br>
 3. Followed by `source env/bin/activate` <br>
@@ -24,8 +24,8 @@ To test Data Loading locally
 
 ### Data Loading
 
-The full datasets already exist within the papers.db downloaded from the gatech OneDrive and folder files located at the google drive aand therefore further preprocessing is not actually required
-
+The full datasets already exist within the papers.db downloaded from the gatech OneDrive and folder files located at the google drive aand therefore further preprocessing is not actually required  
+  
 To test preprocessing locally:
 The original dataset is available at https://snap.stanford.edu/data/cit-HepTh.html where the abstract information tar can be downloaded: cit-HepTh-abstracts.tar.gz
 Extract the tar and gz files and save the cit-HepTh-abstracts folder in the 
