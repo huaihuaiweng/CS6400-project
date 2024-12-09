@@ -4,11 +4,9 @@ from fuzzywuzzy import process
 from app.Recommendations import app as recommendation_app
 from app.helpers import update_results
 
-# Database connection
 def create_connection():
     return sqlite3.connect("papers.db")  # Replace with your actual database path
 
-# Fetch all paper titles from the database (cached with st.cache_data)
 @st.cache_data
 def fetch_all_papers():
     conn = create_connection()
@@ -19,14 +17,12 @@ def fetch_all_papers():
     conn.close()
     return result
 
-# Search for similar titles using fuzzy matching (cached with st.cache_data)
 @st.cache_data(show_spinner=False)
 def search_papers_by_title(papers, query, limit=5):
     titles = [paper[1] for paper in papers]  # Extract only titles
     results = process.extract(query, titles, limit=limit)
     return [(papers[titles.index(result[0])][0], result[0], papers[titles.index(result[0])][2], result[1]) for result in results]
 
-# Fetch all papers in the reading list (not cached to ensure immediate updates)
 def fetch_reading_list():
     conn = create_connection()
     query = """
@@ -40,7 +36,6 @@ def fetch_reading_list():
     conn.close()
     return result
 
-# Add a paper to the reading list
 def add_to_reading_list(conn, paper_id):
     query = "INSERT INTO reading_list (paper_id) VALUES (?)"
     cur = conn.cursor()
@@ -56,7 +51,7 @@ def add_to_reading_list(conn, paper_id):
     except sqlite3.IntegrityError:
         return False  # Paper already in the reading list
     return False
-# Remove multiple papers from the reading list
+
 def remove_from_reading_list(conn, paper_ids):
     query = "DELETE FROM reading_list WHERE paper_id = ?"
     cur = conn.cursor()
@@ -73,10 +68,10 @@ def remove_from_reading_list(conn, paper_ids):
 
 def app():
 
-    # Initialize the app
+
     st.title("Manage Your Reading List")
         
-    # Create a "reading_list" table if it doesn't exist
+
     conn = create_connection()
     cur = conn.cursor()
     cur.execute("""
@@ -87,7 +82,6 @@ def app():
     """)
     conn.commit()
 
-    # Section to search and add papers to the reading list
     st.header("Search and Add Papers to Your Reading List")
     search_query = st.text_input("Enter a title to search:")
     all_papers = fetch_all_papers()
@@ -111,7 +105,6 @@ def app():
         else:
             st.write("No results found. Try a different query.")
 
-    # Display and manage the reading list
     st.header("Your Reading List")
 
     if "reading_list" not in st.session_state:
@@ -133,10 +126,8 @@ def app():
 
         if st.button("Remove Selected Papers"):
             if st.session_state["selected_papers"]:
-                # Remove selected papers
                 remove_from_reading_list(conn, list(st.session_state["selected_papers"]))
                 st.success("Selected papers have been removed from your reading list.")
-                # Clear selections and refresh reading list
                 st.session_state["selected_papers"].clear()
                 st.session_state["reading_list"] = fetch_reading_list()  # Update the reading list
             else:
