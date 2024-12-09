@@ -26,6 +26,7 @@ To test Data Loading locally
 
 The full datasets already exist within the papers.db downloaded from the gatech OneDrive and folder files located at the google drive
 The original dataset is available at https://snap.stanford.edu/data/cit-HepTh.html where the abstract information tar can be downloaded: cit-HepTh-abstracts.tar.gz
+Extract the tar and gz files and save the cit-HepTh-abstracts folder in the repository
 Example of datafile
 
 ```
