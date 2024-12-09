@@ -29,7 +29,7 @@ The full databases already exist within the papers.db downloaded from the gatech
 If the daatabase download steps are skipped, data loading and data preprocessing instructions can be followed to load the databases locally
   
 To (optionally) test preprocessing locally:
-The original dataset is available at https://snap.stanford.edu/data/cit-HepTh.html where the abstract information tar can be downloaded: cit-HepTh-abstracts.tar.gz
+The original dataset is available at https://snap.stanford.edu/data/cit-HepTh.html where the abstract information tar can be downloaded: cit-HepTh-abstracts.tar.gz  
 Extract the tar and gz files and save the cit-HepTh-abstracts folder in the 
 repository
 
