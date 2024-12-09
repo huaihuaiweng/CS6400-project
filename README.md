@@ -29,6 +29,10 @@ The original dataset is available at https://snap.stanford.edu/data/cit-HepTh.ht
 Extract the tar and gz files and save the cit-HepTh-abstracts folder in the repository
 Example of datafile
 
+A subset of the cit-HepTh-abstracts has been uploaded onto the GitHub utilizing a reduced set of 10 papers from each year
+This set may not be able to retrieve good recommendations or identify valid co-citations and citations due to its far smaller dataset size
+However the below instructions for data loading and preprocessing can be tested using this reduced dataset
+
 ```
 Paper: hep-th/0002031
 From: Maulik K. Parikh 
@@ -59,6 +63,8 @@ Note that the collections referenced in the vector DB already exist in the curre
 ### Running the Project
 Backend Running of files was mostly explained in the data preprocessing
 Funtionalities of adding and deleting files can be tested with the cells of insert_delete_paper.ipynb
+
+project.ipynb contains our visualizations and tests for our reports. The cells can be run on the full dataset and full databases to see the effectiveness of our improvements to the querying.
 
 To run the front end UI:
 streamlit run app/Home.py
