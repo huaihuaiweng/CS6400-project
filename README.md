@@ -26,7 +26,7 @@ Our project consists of two components:
 
 The full databases already exist within the papers.db downloaded from the gatech OneDrive and folder files located at the google drive aand therefore further data loading and data preprocessing is not actually required
 
-If the daatabase download steps are skipped, data loading and data preprocessing instructions can be followed to load the databases locally
+If the database download steps are skipped, data loading and data preprocessing instructions can be followed to load the databases locally
   
 To (optionally) test preprocessing locally:
 The original dataset is available at https://snap.stanford.edu/data/cit-HepTh.html where the abstract information tar can be downloaded: cit-HepTh-abstracts.tar.gz  
@@ -61,7 +61,6 @@ To initialize files into the vector and relational Databases:
 
 relational_paper_db.ipynb was utilized for our local testing of queries and does not need to be run for data preprocessing
 
-Note that the collections referenced in the vector DB already exist in the current GitHub
 
 ### Running the Project
 
