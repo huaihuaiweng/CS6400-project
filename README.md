@@ -22,12 +22,14 @@ To test Data Loading locally
 6. For our vector DB we utilize ChromaDB found https://www.trychroma.com/ and for our relational database we utilize SQLite3 found https://docs.python.org/3/library/sqlite3.html
    Both Databases are part of the pip install process and do not require further management
 
-### Data Preperation
+### Data Loading
 
 The full datasets already exist within the papers.db downloaded from the gatech OneDrive and folder files located at the google drive
 The original dataset is available at https://snap.stanford.edu/data/cit-HepTh.html where the abstract information tar can be downloaded: cit-HepTh-abstracts.tar.gz
 Example of datafile
-```Paper: hep-th/0002031
+
+```
+Paper: hep-th/0002031
 From: Maulik K. Parikh 
 Date: Fri, 4 Feb 2000 17:04:51 GMT   (10kb)
 
@@ -42,5 +44,21 @@ superconformal Yang-Mills in finite volume and at large N using the AdS/CFT
 correspondence. We discuss the necessary conditions for a smooth phase
 crossover and obtain an N-dependent curve for the phase boundary.
 \\
-
 ```
+### Data Preprocessing
+
+
+### Running the Project
+Backend Running of files was mostly explained in the data preprocessing
+
+To run the front end UI:
+streamlit run Home.py
+
+To add files into the system:
+Run the cells in neo4j_paper_upload.ipynb
+Run the cells in relational_db_upload.ipynb
+Run the cells in relational_paper_db.ipynb
+
+## References
+
+
