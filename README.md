@@ -65,7 +65,5 @@ streamlit run app/Home.py
 
 
 ## References
-https://docs.trychroma.com/guides - Usage guide for chromaDB all code written is our own
-https://docs.python.org/3/library/sqlite3.html - SQLite3 Documentation Guide
-https://docs.streamlit.io/get-started - streamlit documentation guide
+
 
