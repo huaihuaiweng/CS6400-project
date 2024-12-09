@@ -52,9 +52,8 @@ crossover and obtain an N-dependent curve for the phase boundary.
 ```
 ### Data Preprocessing
 To add files into the vector and relational Databases:
-1. Run the cells in neo4j_paper_upload.ipynb
-2. Run the cells in relational_db_upload.ipynb
-3. Run the cells in relational_paper_db.ipynb
+1. Run the cells in relational_db_upload.ipynb
+2. Run the cells in relational_paper_db.ipynb
 
 relational_paper_db.ipynb was utilized for our local testing of queries and does not need to be run for data preprocessing
 
