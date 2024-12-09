@@ -56,7 +56,7 @@ crossover and obtain an N-dependent curve for the phase boundary.
 ##### Data Preprocessing
 
 To initialize files into the vector and relational Databases:
-1. Download the [abstract dataset](https://snap.stanford.edu/data/cit-HepTh-abstracts.tar.gz) into the project root folder
+1. Download and unzip the [abstract dataset](https://snap.stanford.edu/data/cit-HepTh-abstracts.tar.gz) into the project root folder
 2. Run the cells in relational_db_upload.ipynb to load into the relational DB
 3. Run the cells in vector_db_preprocess.ipynb to load into the vector DB
 
